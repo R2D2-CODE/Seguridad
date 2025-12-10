@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "J7Xe+metA8c=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ArturoMartínez\\source\\Courses\\Seguridad\\SafeVault\\src\\SafeVault.Core\\SafeVault.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ArturoMartínez\\.nuget\\packages\\fluentvalidation\\12.1.1\\fluentvalidation.12.1.1.nupkg.sha512"
+  ],
+  "logs": []
+}
