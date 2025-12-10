@@ -464,6 +464,145 @@ private static bool NotContainSqlInjection(string? value)
 
 ---
 
+## 🐛 Proceso de Debugging con GitHub Copilot
+
+Durante el desarrollo del proyecto, se identificaron y corrigieron varios problemas con la asistencia de GitHub Copilot. A continuación se documenta el proceso de debugging:
+
+### Resumen de Vulnerabilidades Identificadas
+
+| # | Vulnerabilidad | Severidad | Estado |
+|---|----------------|-----------|--------|
+| 1 | SQL Injection en campos de entrada | 🔴 Crítica | ✅ Corregida |
+| 2 | XSS en contenido de vault items | 🔴 Crítica | ✅ Corregida |
+| 3 | Contraseñas sin hash | 🔴 Crítica | ✅ Corregida |
+| 4 | Falta de autorización en endpoints | 🟠 Alta | ✅ Corregida |
+| 5 | Headers de seguridad ausentes | 🟡 Media | ✅ Corregida |
+
+### Problemas de Build Encontrados y Solucionados
+
+#### 1. Incompatibilidad de Versiones de EF Core
+
+**Problema:** Al agregar `Microsoft.EntityFrameworkCore.InMemory` versión 10.0.1, el proyecto no compilaba porque .NET 9 solo soporta EF Core 9.x.
+
+**Error:**
+```
+error NU1102: Unable to find package Microsoft.EntityFrameworkCore.InMemory 
+with version (>= 10.0.1)
+```
+
+**Solución de Copilot:** Identificó la incompatibilidad y sugirió usar la versión 9.0.0:
+```xml
+<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.0" />
+```
+
+#### 2. Namespace de Swagger/OpenAPI Incorrecto
+
+**Problema:** Swashbuckle.AspNetCore 10.x usa Microsoft.OpenApi 2.3.0, que cambió la estructura de namespaces.
+
+**Error:**
+```
+error CS0234: The type or namespace name 'Models' does not exist 
+in the namespace 'Microsoft.OpenApi'
+```
+
+**Solución de Copilot:** Simplificó la configuración de Swagger para evitar el conflicto:
+```csharp
+// Antes (problemático)
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo {...});
+});
+
+// Después (funcionando)
+builder.Services.AddSwaggerGen();
+```
+
+#### 3. Método de FluentAssertions Incorrecto
+
+**Problema:** El método `BeGreaterOrEqualTo` no existe en la versión actual de FluentAssertions.
+
+**Error:**
+```
+error CS1061: 'NumericAssertions<int>' does not contain a definition 
+for 'BeGreaterOrEqualTo'
+```
+
+**Solución de Copilot:** Corrigió el nombre del método:
+```csharp
+// Antes
+workFactor.Should().BeGreaterOrEqualTo(10);
+
+// Después
+workFactor.Should().BeGreaterThanOrEqualTo(10);
+```
+
+#### 4. Validación de Email Demasiado Restrictiva
+
+**Problema:** El validador de SQL Injection bloqueaba emails válidos porque detectaba el carácter `@` como patrón malicioso.
+
+**Síntoma:** Tests fallando:
+```
+Expected emailErrors to be empty because Valid email 'user@example.com' 
+should be accepted, but found {Email contains invalid characters}
+```
+
+**Solución de Copilot:** Creó dos listas de patrones separadas - una para usernames (con `@`) y otra para emails (sin `@`):
+```csharp
+// Para usernames - incluye @
+private static readonly string[] SqlInjectionPatternsWithAt = 
+[
+    "--", ";--", ";", "/*", "*/", "@@", "@", ...
+];
+
+// Para emails - excluye @ porque es válido en emails
+private static readonly string[] SqlInjectionPatterns = 
+[
+    "--", ";--", ";", "/*", "*/", "@@", ...  // Sin "@"
+];
+```
+
+### Asistencia de Copilot en Debugging
+
+GitHub Copilot ayudó en el proceso de debugging de las siguientes maneras:
+
+#### 🔍 Análisis de Errores
+- Interpretó mensajes de error de compilación en español e inglés
+- Identificó la causa raíz de incompatibilidades de paquetes
+- Sugirió versiones compatibles de dependencias
+
+#### 🛠️ Generación de Fixes
+- Propuso código corregido manteniendo la funcionalidad
+- Generó alternativas cuando la solución inicial falló
+- Adaptó patrones de validación para evitar falsos positivos
+
+#### ✅ Verificación de Correcciones
+- Ejecutó builds después de cada cambio
+- Corrió la suite de 120 tests para validar las correcciones
+- Identificó tests que seguían fallando y los corrigió
+
+### Flujo de Trabajo de Debugging
+
+```mermaid
+graph TD
+    A[Error Detectado] --> B[Copilot Analiza]
+    B --> C[Propone Solución]
+    C --> D[Aplica Fix]
+    D --> E{Build OK?}
+    E -->|No| B
+    E -->|Sí| F{Tests OK?}
+    F -->|No| B
+    F -->|Sí| G[✅ Problema Resuelto]
+```
+
+### Lecciones Aprendidas
+
+1. **Versiones de Paquetes:** Siempre verificar compatibilidad con la versión de .NET target
+2. **Validación de Emails:** El carácter `@` es esencial en emails pero puede ser malicioso en otros contextos
+3. **APIs Cambiantes:** Las APIs de terceros (como Swagger) pueden cambiar entre versiones mayores
+4. **Testing Iterativo:** Ejecutar tests después de cada cambio para detectar regresiones
+
+---
+
 ## 🚀 Cómo Ejecutar el Proyecto
 
 ### Prerrequisitos
