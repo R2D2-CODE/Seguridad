@@ -1,0 +1,102 @@
+# .NET Core / Visual Studio
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.dll
+*.pdb
+*.exe
+.vs/
+*.csproj.user
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]uild/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Test results
+[Tt]est[Rr]esult*/
+*.trx
+*.Coverage
+*.coveragexml
+coverage*/
+*.opencover.xml
+
+# IDE
+.idea/
+*.sln.docstates
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+
+# Rider
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# User secrets
+secrets.json
+appsettings.Development.json
+appsettings.Local.json
+
+# SSL/Certificates
+*.pfx
+*.p12
+*.cer
+*.crt
+*.key
+
+# Logs
+*.log
+nlog-*.txt
+
+# Publish output
+publish/
+PublishOutput/
+
+# Docker
+.docker/
+
+# Azure
+.azure/

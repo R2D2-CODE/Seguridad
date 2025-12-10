@@ -12,6 +12,18 @@ public class RegisterRequestValidator : AbstractValidator<RegisterRequest>
     // Dangerous SQL injection patterns to detect
     private static readonly string[] SqlInjectionPatterns = 
     [
+        "--", ";--", ";", "/*", "*/", "@@",
+        "char(", "nchar(", "varchar(", "nvarchar(",
+        "alter", "begin", "cast", "create", "cursor",
+        "declare", "delete", "drop", "end", "exec",
+        "execute", "fetch", "insert", "kill", "select",
+        "sys", "sysobjects", "syscolumns", "table", "update",
+        "union", "where", "xp_", "sp_", "0x", "waitfor"
+    ];
+    
+    // SQL patterns that are dangerous for usernames (more restrictive)
+    private static readonly string[] SqlInjectionPatternsWithAt = 
+    [
         "--", ";--", ";", "/*", "*/", "@@", "@",
         "char(", "nchar(", "varchar(", "nvarchar(",
         "alter", "begin", "cast", "create", "cursor",
@@ -37,7 +49,7 @@ public class RegisterRequestValidator : AbstractValidator<RegisterRequest>
             .MinimumLength(3).WithMessage("Username must be at least 3 characters")
             .MaximumLength(50).WithMessage("Username cannot exceed 50 characters")
             .Matches(@"^[a-zA-Z0-9_]+$").WithMessage("Username can only contain letters, numbers, and underscores")
-            .Must(NotContainSqlInjection).WithMessage("Username contains invalid characters")
+            .Must(NotContainSqlInjectionWithAt).WithMessage("Username contains invalid characters")
             .Must(NotContainXss).WithMessage("Username contains invalid characters");
         
         RuleFor(x => x.Email)
@@ -66,6 +78,13 @@ public class RegisterRequestValidator : AbstractValidator<RegisterRequest>
         if (string.IsNullOrEmpty(value)) return true;
         var lowerValue = value.ToLowerInvariant();
         return !SqlInjectionPatterns.Any(pattern => lowerValue.Contains(pattern));
+    }
+    
+    private static bool NotContainSqlInjectionWithAt(string? value)
+    {
+        if (string.IsNullOrEmpty(value)) return true;
+        var lowerValue = value.ToLowerInvariant();
+        return !SqlInjectionPatternsWithAt.Any(pattern => lowerValue.Contains(pattern));
     }
     
     private static bool NotContainXss(string? value)

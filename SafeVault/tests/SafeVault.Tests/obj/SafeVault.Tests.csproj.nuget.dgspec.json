@@ -25,7 +25,9 @@
           "net9.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://sismetic.pkgs.visualstudio.com/_packaging/SismeticNugets/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
@@ -67,6 +69,10 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.11, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[10.0.1, )"
             }
           },
           "imports": [
@@ -113,7 +119,9 @@
           "net9.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://sismetic.pkgs.visualstudio.com/_packaging/SismeticNugets/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
@@ -183,7 +191,9 @@
           "net9.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://sismetic.pkgs.visualstudio.com/_packaging/SismeticNugets/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
@@ -222,6 +232,14 @@
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
               "version": "[9.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[10.0.1, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.15.0, )"
             }
           },
           "imports": [
@@ -265,7 +283,9 @@
           "net9.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://sismetic.pkgs.visualstudio.com/_packaging/SismeticNugets/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {

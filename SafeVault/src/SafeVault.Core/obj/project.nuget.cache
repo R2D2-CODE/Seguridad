@@ -1,10 +1,20 @@
 {
   "version": 2,
-  "dgSpecHash": "J7Xe+metA8c=",
+  "dgSpecHash": "U5anSRpjziE=",
   "success": true,
   "projectFilePath": "C:\\Users\\ArturoMartínez\\source\\Courses\\Seguridad\\SafeVault\\src\\SafeVault.Core\\SafeVault.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ArturoMartínez\\.nuget\\packages\\fluentvalidation\\12.1.1\\fluentvalidation.12.1.1.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "message": "Error al obtener los datos de vulnerabilidad del paquete: No se puede cargar el índice de servicio del origen https://sismetic.pkgs.visualstudio.com/_packaging/SismeticNugets/nuget/v3/index.json.",
+      "projectPath": "C:\\Users\\ArturoMartínez\\source\\Courses\\Seguridad\\SafeVault\\src\\SafeVault.Core\\SafeVault.Core.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\ArturoMartínez\\source\\Courses\\Seguridad\\SafeVault\\src\\SafeVault.Core\\SafeVault.Core.csproj",
+      "targetGraphs": []
+    }
+  ]
 }

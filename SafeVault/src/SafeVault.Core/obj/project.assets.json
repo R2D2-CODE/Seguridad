@@ -64,7 +64,9 @@
         "net9.0"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://sismetic.pkgs.visualstudio.com/_packaging/SismeticNugets/nuget/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
@@ -112,5 +114,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100-rc.2.25502.107/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Error al obtener los datos de vulnerabilidad del paquete: No se puede cargar el índice de servicio del origen https://sismetic.pkgs.visualstudio.com/_packaging/SismeticNugets/nuget/v3/index.json."
+    }
+  ]
 }

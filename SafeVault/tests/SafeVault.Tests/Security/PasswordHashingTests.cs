@@ -180,7 +180,7 @@ public class PasswordHashingTests
         var workFactorPart = hash.Split('$')[2];
         var workFactor = int.Parse(workFactorPart);
         
-        workFactor.Should().BeGreaterOrEqualTo(10, 
+        workFactor.Should().BeGreaterThanOrEqualTo(10, 
             "Work factor should be at least 10 for security");
     }
     

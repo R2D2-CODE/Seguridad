@@ -196,7 +196,7 @@ public class AuthorizationTests
     [InlineData("notanemail")]          // No @ symbol
     [InlineData("@nodomain.com")]       // No local part
     [InlineData("noatsymbol.com")]      // No @ symbol
-    [InlineData("spaces in@email.com")] // Spaces
+    [InlineData("missing@")]            // Missing domain
     public async Task Register_ShouldReject_InvalidEmails(string invalidEmail)
     {
         // Arrange
